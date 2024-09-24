@@ -4,10 +4,11 @@
             <dropper></dropper>
         </a>
         <input class="colour-select" type="color" v-model="colour" />
-        <input class="colour-text" type="text" v-model="colour" />
+        <input :id="`colour_${index}`" class="colour-text" type="text" v-model="colour" />
     </div>
     <div class="opacity-wrapper">
-        <input class="slider" type="range" min="0" max="100" v-model="opacity" />
+        <input :id="`opacity_${index}`" class="slider" type="range" min="0" max="100" v-model="opacity" />
+        <div v-html="opacity" />
     </div>
 </template>
 
@@ -23,14 +24,27 @@ export default {
     components: {
         'dropper': Dropper
     },
+    emits: ['colour-updated'],
+    props: ['index'],
     data() {
         return {
             dropperSupported: hasSupport,
             colour: '#000000',
-            opacity: 0,
+            opacity: 0
+        }
+    },
+    watch: {
+        colour(val) {
+            this.refresh();
+        },
+        opacity(val) {
+            this.refresh();
         }
     },
     methods: {
+        refresh() {
+            setTimeout(() => this.$emit('colour-updated'), 1);
+        },
         dropper() {
             eyeDropper
                 .open()
@@ -84,9 +98,9 @@ export default {
             padding-left: 8px;
             font-size: 18px;
             line-height: 20px;
-            width: 200px;
-            min-width: 200px;
-            max-width: 200px;
+            width: 472px;
+            min-width: 472px;
+            max-width: 472px;
 
             &:focus-visible {
                 outline: none;
@@ -95,13 +109,15 @@ export default {
     }
 
     .opacity-wrapper {
+        display: flex;
         padding-top: 10px;
+        margin-bottom: 20px;
 
         .slider {
             position: relative;
             border-radius: 4px;
             -webkit-appearance: none;
-            width: 305px;
+            width: 580px;
             height: 25px;
             background: url("../../assets/images/transparent.png");
             background-size: auto 100%;
@@ -138,6 +154,13 @@ export default {
           border-radius: 4px;
           border: 1px solid white;
           z-index: 3;
+        }
+
+        div {
+            width: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 </style>

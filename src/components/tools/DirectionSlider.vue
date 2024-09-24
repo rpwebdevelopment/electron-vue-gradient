@@ -1,10 +1,9 @@
 <template>
     <div class="direction-wrapper">
         <label for="direction_slider">Direction:</label>
-        <div class="slider-wrap">
+        <div class="slider-wrap" id="slider-container">
             <round-slider
-                :v-model="degree"
-                name="direction_slider"
+                :change="changed"
                 start-angle="90"
                 width="6"
                 min="0"
@@ -26,7 +25,7 @@ export default {
     },
     data() {
         return {
-            degree: 0
+            degree: 90
         }
     },
     methods: {
@@ -34,6 +33,9 @@ export default {
             return {
                 'font-size': '10px'
             }
+        },
+        changed(val) {
+            this.$emit('direction-updated');
         }
     }
 }
@@ -41,7 +43,7 @@ export default {
 
 <style scoped lang="scss">
     .direction-wrapper {
-        padding-bottom: 10px;
+        padding-bottom: 7px;
 
         .slider-wrap {
             padding-top: 10px;
