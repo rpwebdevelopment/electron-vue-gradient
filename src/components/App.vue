@@ -7,8 +7,18 @@
     <colour-picker v-for="i in index" :index="i - 1" @colour-updated="resetGradient"></colour-picker>
 
     <div class="button-wrap">
-        <button v-on:click="incrementIndex">Add Point</button>
-        <button v-on:click="decrementIndex">Remove Point</button>
+        <button v-on:click="incrementIndex" class="add-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 448 512">
+                <path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zM200 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
+            </svg>
+            Add
+        </button>
+        <button v-on:click="decrementIndex" class="remove-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 448 512">
+                <path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm88 200l144 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-144 0c-13.3 0-24-10.7-24-24s10.7-24 24-24z"/>
+            </svg>
+            Remove
+        </button>
     </div>
 
     <code-editor
@@ -117,6 +127,12 @@ export default {
 <style lang="scss">
     body {
         font-family: Roboto, Helvetica, Arial !important;
+        background: #F9F9F9;
+        -webkit-app-region: drag;
+
+        & > * {
+          -webkit-app-region: none;
+        }
 
         .header-wrap {
             display: flex;
@@ -180,7 +196,34 @@ export default {
         }
 
         .button-wrap {
+            display: flex;
             margin-bottom: 20px;
+
+            button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: none;
+                padding: 5px 10px;
+                border-radius: 4px;
+                cursor: pointer;
+                width: 110px;
+                color: #fff;
+            }
+
+            .add-button {
+                background-color: rgb(102, 153, 255);
+                margin-right: 8px;
+            }
+
+            .remove-button {
+                background-color: #ee4949;
+            }
+
+            svg {
+                fill: #fff;
+                margin-right: 5px;
+            }
         }
     }
 </style>

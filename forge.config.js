@@ -3,26 +3,35 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 
 module.exports = {
   packagerConfig: {
+    icon: 'src/assets/icons/logo',
     asar: true,
   },
   rebuildConfig: {},
   makers: [
     {
-      name: '@electron-forge/maker-squirrel',
-      config: {},
-    },
-    {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
     },
     {
-      name: '@electron-forge/maker-deb',
-      config: {},
+      name: '@electron-forge/maker-squirrel',
+      config: {
+        setupIcon: 'src/assets/icons/logo.ico'
+      },
     },
     {
-      name: '@electron-forge/maker-rpm',
-      config: {},
+      name: '@electron-forge/maker-appx',
+      config: {
+        makeVersionWinStoreCompatible: true
+      }
     },
+    {
+      name: '@electron-forge/maker-dmg',
+      config: {
+        options: {
+          icon: 'src/assets/icons/logo.icns'
+        }
+      },
+    }
   ],
   plugins: [
     {
