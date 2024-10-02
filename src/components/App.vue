@@ -27,6 +27,7 @@
         :tab-spaces="4"
         :wrap="false"
         :read-only="true"
+        :highlight="hljs"
         min-width="580px"
         max-width="580px"
         border-radius="4px"
@@ -39,9 +40,15 @@
 import ColourPicker from "./tools/ColourPicker.vue";
 import DirectionSlider from "./tools/DirectionSlider.vue";
 import HexToRgb from "../assets/js/HexToRgb";
+import hljs from "highlight.js";
 
 export default {
     name: "App",
+    computed: {
+        hljs() {
+            return hljs
+        }
+    },
     data() {
         return {
             index: 3,

@@ -70,4 +70,16 @@ module.exports = {
       [FuseV1Options.OnlyLoadAppFromAsar]: true,
     }),
   ],
+  publishers: [
+    {
+      name: '@electron-forge/publisher-github',
+      config: {
+        repository: {
+          owner: 'rpwebdevelopment',
+          name: 'electron-vue-gradient'
+        },
+        prerelease: true
+      }
+    }
+  ]
 };
