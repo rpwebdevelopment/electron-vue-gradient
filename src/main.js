@@ -1,15 +1,6 @@
 const { app, BrowserWindow, nativeImage, Tray } = require('electron');
 const path = require('node:path');
 
-const { updateElectronApp, UpdateSourceType } =  require("update-electron-app");
-updateElectronApp({
-  updateSource: {
-      type: UpdateSourceType.ElectronPublicUpdateService,
-      host: 'https://github.com',
-      repo: 'rpwebdevelopment/electron-vue-gradient',
-  }
-});
-
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
